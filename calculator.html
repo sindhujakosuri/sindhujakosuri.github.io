@@ -1,5 +1,3 @@
-
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +11,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: linear-gradient(135deg, #bfc4d5, #1e2a78); /* Navy Blue Gradient */
+      background: linear-gradient(135deg, #bfc4d5, #1e2a78);
       font-family: 'Segoe UI', sans-serif;
     }
 
@@ -22,19 +20,19 @@
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
-      width: 320px;
+      width: 360px;
     }
 
     #display {
-      width: 100%;
+      width: 90%;
       height: 50px;
       font-size: 26px;
       margin-bottom: 20px;
-      padding: 12px;
-      background: #cceeff; /* Light Blue */
+      padding: 15px;
+      background: #cceeff;
       color: #000;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       text-align: right;
       box-shadow: inset 0 0 5px #99ddff;
     }
@@ -42,15 +40,15 @@
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 15px;
     }
 
     button {
-      padding: 20px;
-      font-size: 18px;
+      padding: 18px;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
-      background: #2e3a87; /* Deep Navy Blue */
+      background: #4052b5;
       color: white;
       cursor: pointer;
       transition: 0.2s ease;
@@ -61,18 +59,20 @@
       background: #4052b5;
     }
 
-    /* Special buttons */
-    button:nth-child(1), /* AC */
-    button:nth-child(2), /* DEL */
-    button:nth-child(20) /* = */ {
-      background: #ff66b2; /* Pink */
-      color: white;
+    .special {
+      background: #ff66b2;
     }
 
-    button:nth-child(1):hover,
-    button:nth-child(2):hover,
-    button:nth-child(20):hover {
+    .special:hover {
       background: #ff3385;
+    }
+
+    .function {
+      background: #4052b5;
+    }
+
+    .function:hover {
+      background: #4052b5;
     }
   </style>
 </head>
@@ -80,11 +80,24 @@
   <div class="calculator">
     <input type="text" id="display" disabled />
     <div class="buttons">
-      <button onclick="clearDisplay()">AC</button>
-      <button onclick="deleteLast()">DEL</button>
+      <!-- Top Row: AC & DEL -->
+      <button class="special" onclick="clearDisplay()">AC</button>
+      <button class="special" onclick="deleteLast()">DEL</button>
+      <button class="function" onclick="applyFunction('reciprocal')">1/x</button>
+      <button class="function" onclick="applyFunction('factorial')">x!</button>
+
+      <!-- Function Buttons -->
+      <button class="function" onclick="applyFunction('log')">lg</button>
+      <button class="function" onclick="applyFunction('ln')">ln</button>
+      <button class="function" onclick="insertPi()">π</button>
+      <button class="function" onclick="insertE()">e</button>
+
+      <button class="function" onclick="append('(')">(</button>
+      <button class="function" onclick="append(')')">)</button>
       <button onclick="append('%')">%</button>
       <button onclick="append('/')">/</button>
 
+      <!-- Number & Operator Buttons -->
       <button onclick="append('7')">7</button>
       <button onclick="append('8')">8</button>
       <button onclick="append('9')">9</button>
@@ -103,12 +116,12 @@
       <button onclick="append('0')">0</button>
       <button onclick="append('.')">.</button>
       <button onclick="append('^')">^</button>
-      <button onclick="calculate()">=</button>
+      <button class="special" onclick="calculate()">=</button>
     </div>
   </div>
 
   <script>
-    let display = document.getElementById('display');
+    const display = document.getElementById('display');
 
     function append(value) {
       display.value += value;
@@ -122,12 +135,54 @@
       display.value = display.value.slice(0, -1);
     }
 
+    function insertPi() {
+      display.value += Math.PI.toFixed(8);
+    }
+
+    function insertE() {
+      display.value += Math.E.toFixed(8);
+    }
+
+    function applyFunction(func) {
+      try {
+        let val = parseFloat(display.value);
+        if (isNaN(val)) return;
+
+        switch (func) {
+          case 'log':
+            display.value = Math.log10(val).toFixed(8);
+            break;
+          case 'ln':
+            display.value = Math.log(val).toFixed(8);
+            break;
+          case 'factorial':
+            display.value = factorial(val);
+            break;
+          case 'reciprocal':
+            display.value = (1 / val).toFixed(8);
+            break;
+        }
+      } catch {
+        display.value = 'Error';
+      }
+    }
+
+    function factorial(n) {
+      if (n < 0) return 'Error';
+      if (n === 0 || n === 1) return 1;
+      let result = 1;
+      for (let i = 2; i <= n; i++) {
+        result *= i;
+      }
+      return result;
+    }
+
     function calculate() {
       try {
-        let expression = display.value.replace(/\^/g, '**'); // Convert ^ to **
+        let expression = display.value.replace(/\^/g, '**');
         let result = eval(expression);
         display.value = result;
-      } catch (e) {
+      } catch {
         display.value = 'Error';
       }
     }
