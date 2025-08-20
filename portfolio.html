@@ -1,415 +1,610 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kosuri Sunitha Sindhuja's Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    color: #9dd0e6;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kosuri Sunitha Sindhuja Portfolio</title>
+  <style>
+    :root {
+      --primary-color: #1e2a78;
+      --secondary-color: #30d5c8;
+      --accent-color: #f5e8b1ff;
+      --background-gradient: linear-gradient(135deg, #243B55 0%, #141E30 100%);
+      --light-background: #f0f4f8;
+      --text-color: #eef2f7;
+      --shadow-glow: 0 0 15px rgba(170, 229, 155, 0.6);
+      --button-hover-glow: 0 0 12px 3px rgba(48, 213, 200, 0.8);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: var(--background-gradient);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(30, 42, 120, 0.95);
+      box-shadow: 0 0 20px var(--shadow-glow);
+      z-index: 1000;
+    }
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    nav .logo {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: var(--accent-color);
+      letter-spacing: 2px;
+      user-select: none;
+      cursor: default;
+      text-shadow: 0 0 8px var(--accent-color);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+      user-select: none;
+      color: var(--text-color);
+      font-weight: 600;
+      text-shadow: 0 0 4px #0008;
+    }
+    nav ul li:hover,
+    nav ul li.active {
+      background-color: var(--accent-color);
+      color: var(--light-background);
+      box-shadow: var(--button-hover-glow);
+    }
+    section {
+      max-width: 1100px;
+      margin: 100px auto 60px;
+      padding: 2rem 3rem;
+      background: linear-gradient(145deg, #344675, #28315e);
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+      color: var(--text-color);
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h1, h2 {
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 8px var(--accent-color);
+    }
+    h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+    }
+    h2 {
+      font-size: 2.6rem;
+    }
+    #home {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      min-height: 80vh;
+      text-align: center;
+      color: var(--text-color);
+      text-shadow: 0 0 6px #0009;
+    }
+    #home .home-text p {
+      font-size: 1.6rem;
+      margin: 1.5rem 0 2.5rem;
+      color: var(--secondary-color);
+      font-weight: 600;
+      text-shadow: 0 0 6px #30d5c8aa;
+    }
+    #home .home-image img {
+      width: 700%;
+      max-width: 250px;
+      border-radius: 30%;
+      box-shadow:
+        0 0 40px var(--accent-color),
+        0 0 60px var(--secondary-color);
+      animation: float 4s ease-in-out infinite;
+      transition: box-shadow 0.4s ease;
+    }
+    #home .home-image img:hover {
+      box-shadow:
+        0 0 80px var(--accent-color),
+        0 0 90px var(--secondary-color);
+    }
+    .education-block {
+      margin-bottom: 2rem;
+      padding: 1.5rem 2rem;
+      border-left: 6px solid var(--primary-color);
+      background: #28315e95;
+      border-radius: 12px;
+      box-shadow: inset 0 0 15px #20305f88;
+      color: var(--text-color);
+    }
+    .education-block h3 {
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+      color: var(--secondary-color);
+      text-shadow: 0 0 6px #30d5c8bb;
+    }
+    .education-block p {
+      font-size: 1.15rem;
+      margin: 0.3rem 0;
+      font-weight: 600;
+    }
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .skill {
+      background: #2c3a70cc;
+      border-radius: 20px;
+      width: 280px;
+      padding: 1.5rem 2rem;
+      box-shadow:
+        0 8px 20px rgba(184, 238, 148, 0.3),
+        inset 0 0 12px #30d5c8aa;
+      transition: transform 0.3s ease, box-shadow 0.5s ease;
+      cursor: default;
+      color: var(--text-color);
+    }
+    .skill:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        0 12px 30px var(--accent-color),
+        inset 0 0 20px var(--secondary-color);
+      animation: pulseGlow 2.5s infinite;
+    }
+    .skill h3 {
+      margin-bottom: 1.3rem;
+      color: var(--accent-color);
+      font-weight: 900;
+      text-shadow: 0 0 7px var(--accent-color);
+    }
+    .progress-bar {
+      background: #1c2448;
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+      height: 28px;
+      box-shadow: inset 0 0 8px #30d5c8cc;
+    }
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #30d5c8, #e2d58dff);
+      border-radius: 25px;
+      text-align: right;
+      line-height: 28px;
+      color: white;
+      font-weight: 700;
+      padding-right: 14px;
+      transition: width 1.8s ease;
+      user-select: none;
+      box-shadow: 0 0 8px #30d5c8cc;
+    }
+    .certificates-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 4rem 3rem;
+      justify-items: center;
+      padding-top: 2rem;
+    }
+    .certificate-card {
+      background-color: #1f2b60cc;
+      border-radius: 20px;
+      box-shadow:
+        0 0 35px var(--secondary-color),
+        inset 0 0 25px var(--accent-color);
+      width: 100%;
+      max-width: 440px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.6s ease;
+      cursor: pointer;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 30px;
+      padding-top: 15px;
+    }
 
-nav {
-    background-color: #0066cc; 
-    padding: 15px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-}
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    padding: 8px 15px;
-}
-
-nav ul li a:hover {
-    background-color: #090229; 
-    border-radius: 5px;
-}
-
-
-.home-section {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #81ccd6;
-}
-
-.home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.text-container {
-    margin-right: 30px;
-}
-
-h1 {
-    font-size: 3rem;
-    color: #0d345a;
-}
-
-h2 {
-    font-size: 2rem;
-    color: #15074d;
-}
-
-.profile-img {
-    width: 250px;
-    height: 250px;
-    border-radius: 60%;
-}
-
-/* Section Header */
-.section-header {
-    background-color: #86b3e0; /* Blue */
-    color: white;
-    padding: 28px;
-    border-radius: 3px;
-    margin-bottom: 50px;
-    margin-top: 80px;
-    text-align: center;
-    height: 30px;
-}
-
-/* Education Box */
-.education-section .education-box {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background-color: #8fbfec;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.education-item {
-    background-color: #d6dee3;
-    padding: 5px;
-    border-radius: 8px;
-}
-
-h3 {
-    font-size: 1.5rem;
-    color: #020911;
-}
-
-p {
-    font-size: 1rem;
-    margin: 3px 0;
-    color:#15074d;
-}
-
-.skills-section .skills-box {
-    background-color: #eaeef1;
-    padding: 3px;
-    border-radius: 10px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-.skill {
-    background-color: #f0f3f7;
-    padding: 2px;
-    margin: 5px 0;
-    border-radius: 4px;
-    height: 100px;
-}
-
-.progress-bar-container {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-}
-
-.progess-bar {
-    height: 10px;
-    background-color: #91d7f3; 
-    border-radius: 5px;
-    flex-grow: 1;
-}
-
-.percentage {
-    margin-left: 10px;
-    font-weight: bold;
-    color:#0d345a;
-}
-
-/* Achievements Section */
-.achievements-section .achievements-box {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-.achievement-item {
-    text-align: center;
-}
-
-.achievement-img {
-    width: 350px;
-    height:300px;
-    border-radius: 10px;
-}
-
-/* Contact Section */
-.contact-section .contact-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.contact-box input, .contact-box textarea {
-    padding: 10px;
-    width: 130%;
-    max-width: 4000px;
-    margin-bottom: 10px;
-    border-radius: 25px;
-    border: 3px solid #8eb3d6;
-}
-.contact-box button {
-    padding: 10px 20px;
-    background-color: #0066cc;
-    color: rgb(133, 223, 182);
-    border: none;
-    cursor: pointer;
-    border-radius: 100px;
-}
-.h3{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-.contact-box button:hover {
-    background-color: #cf66a9; /* Light Yellow */
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #0066cc;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-.About-box {
-    border: 2px solid #4CAF50;
-    padding: 20px;
-    width: 80%;
-    margin: 20px auto;
-    background-color: #95e7fc;
-    font-family: Arial, sans-serif;
-}
-p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-.About-section .About-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-    </style>
+    .certificate-card:hover {
+      transform: scale(1.12);
+      box-shadow:
+        0 0 60px var(--accent-color),
+        inset 0 0 40px var(--secondary-color);
+    }
+    .certificate-image {
+      width: 80%;
+      max-height: 180px;
+      object-fit: contain;
+      background: #0a1430;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #888;
+      user-select: none;
+      box-shadow: inset 0 0 25px #30d5c8aa;
+      margin: 25px auto 20px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .certificate-image img {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+      user-select: none;
+    }
+    .certificate-desc {
+      padding: 0 2rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      text-align: center;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px var(--accent-color);
+      font-size: 1.25rem;
+      line-height: 1.5;
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--text-color);
+    }
+    form label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: 900;
+      color: var(--secondary-color);
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 5px #30d5c8aa;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1.7rem;
+      border-radius: 12px;
+      border: 2px solid #30d5c8;
+      font-size: 1.1rem;
+      background: #1e2a4dcc;
+      color: var(--text-color);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      resize: vertical;
+      box-shadow: inset 0 0 8px #30d5c8aa;
+    }
+    form input::placeholder,
+    form textarea::placeholder {
+      color: #a3cfd9cc;
+      font-weight: 600;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 18px var(--accent-color);
+    }
+    form button {
+      padding: 1rem 2.2rem;
+      background-color: var(--accent-color);
+      border: none;
+      border-radius: 30px;
+      color: var(--light-background);
+      font-weight: 900;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.4s ease, box-shadow 0.5s ease;
+      display: block;
+      margin: 0 auto;
+      width: 190px;
+      text-shadow: 0 0 7px var(--light-background);
+      box-shadow: 0 0 20px var(--accent-color);
+      user-select: none;
+    }
+    form button:hover {
+      background-color: #eedaaeff;
+      box-shadow: 0 0 30px #ff8a78; }
+    footer {
+      text-align: center;
+      padding: 1.2rem;
+      font-size: 1rem;
+      color: #a7b0cf;
+      background: rgba(30, 42, 120, 0.7);
+      border-top: 1px solid #28315e;
+      margin-top: auto;
+      text-shadow: 0 0 4px #000a;
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow:
+          0 12px 30px var(--accent-color),
+          inset 0 0 20px var(--secondary-color);
+      }
+      50% {
+        box-shadow:
+          0 15px 40px #ecc2b1ff,
+          inset 0 0 30px #33f9d2;
+      }
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+      #home {
+        flex-direction: column;
+      }
+      .skills-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .skill {
+        width: 90%;
+        max-width: 420px;
+      }
+      .certificates-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        padding-top: 2rem;
+      }
+      .certificate-card {
+        max-width: 420px;
+        width: 90%;
+        padding-bottom: 35px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<!-- Navigation Menu -->
-<nav>
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#About">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+<header>
+  <nav>
+    <div class="logo" aria-label="Site logo and portfolio owner name">Kosuri Sunitha Sindhuja</div>
+    <ul id="nav-links" role="list" aria-label="Primary navigation">
+      <li class="nav-link active" data-target="home" role="listitem" tabindex="0">Home</li>
+      <li class="nav-link" data-target="education" role="listitem" tabindex="0">Education</li>
+      <li class="nav-link" data-target="skills" role="listitem" tabindex="0">Skills</li>
+      <li class="nav-link" data-target="certificates" role="listitem" tabindex="0">Certificates</li>
+      <li class="nav-link" data-target="contact" role="listitem" tabindex="0">Contact</li>
     </ul>
-</nav>
-
-<!-- Home Section -->
-<section id="home" class="home-section">
-    <div class="home-container">
-        <div class="text-container">
-            <h1>Welcome to My Portfolio</h1>
-            <h2>Kosuri Sunitha Sindhuja</h2>
+  </nav>
+</header>
+<main>
+  <!-- HOME -->
+  <section id="home" class="visible" role="region" aria-labelledby="home-heading" tabindex="-1">
+    <div class="home-text" role="banner" aria-label="Introduction">
+      <p>Welcome to My Portfolio</p>
+      <h1 id="home-heading">Kosuri Sunitha Sindhuja</h1>
+      <h2>B.Tech 3rd Year Student</h2>
+      <p style="margin-top: 1.5rem; font-size: 1.1rem; color: var(--text-color); max-width: 480px; margin-left: auto; margin-right: auto;">
+        Passionate about web development and UI/UX design. Dedicated to learning and applying modern technologies such as HTML, CSS, React.js, and Node.js to create impactful digital experiences.
+      </p>
+    </div>
+    <div class="home-image" aria-label="Profile Picture">
+      <img src="image.jpg" alt="Kosuri Sunitha Sindhuja Profile Picture" />
+    </div>
+  </section>
+  <section id="education" aria-labelledby="education-heading" tabindex="-1" role="region">
+    <h2 id="education-heading">Education</h2>
+    <div class="education-block" aria-label="Schooling details">
+      <h3>Schooling</h3>
+      <p><strong>Sarad English Medium High School, Akividu</strong> - Completed in 2020</p>
+      <p>Percentage: 90%</p>
+    </div>
+    <div class="education-block" aria-label="Intermediate details">
+      <h3>Intermediate</h3>
+      <p><strong>Karthikeya Junior College, Akividu</strong> - 2021-2022</p>
+      <p>Percentage: 98%</p>
+    </div>
+    <div class="education-block" aria-label="B.Tech details">
+      <h3>B.Tech (3rd Year)</h3>
+      <p><strong>Sasi Institute of Technology and Engineering</strong></p>
+      <p>Current Percentage: 92%</p>
+    </div>
+  </section>
+  <section id="skills" aria-labelledby="skills-heading" tabindex="-1" role="region">
+    <h2 id="skills-heading">Skills & Knowledge</h2>
+    <div class="skills-container" role="list" aria-label="Skill proficiency levels">
+      <article class="skill" role="listitem" aria-label="HTML knowledge 80 percent">
+        <h3>HTML</h3>
+        <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" role="progressbar" tabindex="0">
+          <span style="width: 0%">0%</span>
         </div>
-        <img src="sin1.jpg" alt="Kosuri Sunitha Sindhuja" class="profile-img">
-    </div>
-</section>
-<br><br><br><br><br><br><br><br><br>
-
-<section id="About" class="About-section">
-<div class="About-box">
-    <h2>About</h2>
-    <h2><strong>Name:</strong> Kosuri Sunitha Sindhuja</h2>
-    <p><strong>I am a dedicated and passionate B.Tech student specializing in Computer Science and Engineering. I have developed strong technical, communication, and coding skills throughout my academic journey. I have hands-on experience with programming languages such as C, Python, and Java, and I am deeply interested in coding and software development. My enthusiasm for learning and problem-solving motivates me to continuously enhance my skills and knowledge in the field of technology.</p>
-</div>
-
-
-
-
-<!-- Education Section -->
-<section id="education" class="education-section">
-    <div class="section-header">
-        <h2>Education</h2>
-    </div>
-    <div class="education-box">
-        <div class="education-item">
-            <h3>B.Tech</h3>
-            <p><strong>Institute:</strong> SASI Institute of Technology and Engineering, Tadepalligudem</p>
-            <p><strong>Year:</strong> Currently Pursuing</p>
-            <p><strong>CGPA:</strong> 9.4</p>
+      </article>
+      <article class="skill" role="listitem" aria-label="CSS knowledge 80 percent">
+        <h3>CSS</h3>
+        <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" role="progressbar" tabindex="0">
+          <span style="width: 0%">0%</span>
         </div>
-        <div class="education-item">
-            <h3>Intermediate</h3>
-            <p><strong>Institute:</strong> Sri Karthikeya Junior College, Akividu</p>
-            <p><strong>Year of Passing:</strong> 2023</p>
-            <p><strong>Percentage:</strong> 98.4%</p>
+      </article>
+      <article class="skill" role="listitem" aria-label="Node.js knowledge 50 percent">
+        <h3>Node.js</h3>
+        <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" role="progressbar" tabindex="0">
+          <span style="width: 0%">0%</span>
         </div>
-        <div class="education-item">
-            <h3>SSC</h3>
-            <p><strong>Institute:</strong> Sarada E.M. High School, Akividu</p>
-            <p><strong>Year of Passing:</strong> 2021</p>
-            <p><strong>Percentage:</strong> 97.3%</p>
+      </article>
+      <article class="skill" role="listitem" aria-label="React.js knowledge 50 percent">
+        <h3>React.js</h3>
+        <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" role="progressbar" tabindex="0">
+          <span style="width: 0%">0%</span>
         </div>
-    </div>
-</section>
-<br><br><br><br><br><br><br><br>
-<!-- Skills Section -->
-<section id="skills" class="skills-section">
-    <div class="section-header">
-        <h2>Skills</h2>
-    </div>
-    <div class="skills-box">
-        <div class="skill">
-            <h3>HTML</h3>
-            <div class="progess-bar-container">
-                <div class="progess-bar" style="width: 90%;"></div>
-                <span class="percentage">90%</span>
-            </div>
+      </article>
+      <article class="skill" role="listitem" aria-label="UI/UX Design knowledge 70 percent">
+        <h3>UI/UX Design</h3>
+        <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" role="progressbar" tabindex="0">
+          <span style="width: 0%">0%</span>
         </div>
-        <div class="skill">
-            <h3>JavaScript</h3>
-            <div class="progess-bar-container">
-                <div class="progess-bar" style="width: 90%;"></div>
-                <span class="percentage">90%</span>
-            </div>
+      </article>
+    </div>
+  </section>
+  <section id="certificates" aria-labelledby="certificates-heading" tabindex="-1" role="region">
+    <h2 id="certificates-heading">Certificates</h2>
+    <div class="certificates-container" role="list" aria-label="Certificates and achievements">
+      <div class="certificate-card" role="listitem" tabindex="0">
+        <div class="certificate-image" aria-label="Completion on 500 difficulty rating problems certificate image placeholder">
+          <img src="pic1.jpg" alt="Certificate: Completion on 500 difficulty rating problems in CodeChef" />
         </div>
-        <div class="skill">
-            <h3>React.js</h3>
-            <div class="progess-bar-container">
-                <div class="progess-bar" style="width: 75%;"></div>
-                <span class="percentage">75%</span>
-            </div>
+        <div class="certificate-desc">
+          <p>Completion on 500 Difficulty Rating Problems in CodeChef</p>
         </div>
-        <div class="skill">
-            <h3>Node.js</h3>
-            <div class="progess-bar-container">
-                <div class="progess-bar" style="width: 60%;"></div>
-                <span class="percentage">60%</span>
-            </div>
+      </div>
+      <div class="certificate-card" role="listitem" tabindex="0">
+        <div class="certificate-image" aria-label="Java Certificate in CodeChef image placeholder">
+          <img src="pic2.jpg" alt="Certificate: Completion of Java Certificate in CodeChef" />
         </div>
-    </div>
-</section>
-<br><br><br><br><br><br><br><br>
-<!-- Achievements Section -->
-<section id="achievements" class="achievements-section">
-    <div class="section-header">
-        <h2>Achievements</h2>
-    </div>
-    <div class="achievements-box">
-        <div class="achievement-item"><a>
-            <img src="pic.jpg" alt="Achievement Image 1"  width=300px class="achievement-img">
-            <h3>I have completed 500 problems in the chodechef and received a certificate</h3>
-            <link href="/pic.jpg">
-        </a>
+        <div class="certificate-desc">
+          <p>Completion of Java Certificate in CodeChef</p>
         </div>
-        <div class="achievement-item">
-            <a>
-            <img src="pic1.jpg" alt="Achievement Image 2"  width=300px class="achievement-img">
-            <h3>I have participated in an prestigious hackathon conducted by the ACM members called prayathna 2.0 and i have received a certificate  </h3>
-            <link href="/pic1.jpg">
-        </a>
+      </div>
+      <div class="certificate-card" role="listitem" tabindex="0">
+        <div class="certificate-image" aria-label="Participation in Hackathon Prayatna 2.0 image placeholder">
+          <img src="pic3.jpg" alt="Certificate: Participation in Hackathon Prayatna 2.0 organised by SITE ACM and AITR ACM" />
         </div>
+        <div class="certificate-desc">
+          <p>Participation in Hackathon Prayatna 2.0 organised by SITE ACM and AITR ACM</p>
+        </div>
+      </div>
+      <div class="certificate-card" role="listitem" tabindex="0">
+        <div class="certificate-image" aria-label="Completion of 4 months full stack internship at CODEC TECHNOLOGIES image placeholder">
+          <img src="pic4.jpg" alt="Certificate: Completion of 4 months Full Stack Development Internship in CODEC TECHNOLOGIES" />
+        </div>
+        <div class="certificate-desc">
+          <p>Completion of 4 Months Full Stack Development Internship in CODEC TECHNOLOGIES</p>
+        </div>
+      </div>
+      <div class="certificate-card" role="listitem" tabindex="0">
+        <div class="certificate-image" aria-label="Completion of 1 month frontend development internship at CodeAlpha image placeholder">
+          <img src="pic5.jpg" alt="Certificate: Completion of 1 Month Frontend Development Internship (Portfolio, Image Gallery, Calculator tasks) at CodeAlpha" />
+        </div>
+        <div class="certificate-desc">
+          <p>Completion of 1 Month Frontend Development Internship by Completing 3 Tasks (Portfolio, Image Gallery, Calculator) at CodeAlpha</p>
+        </div>
+      </div>
     </div>
-</section>
-<br><br><br><br><br>
-<section id="projects" class="achievements-section">
-    <div class="section-header">
-        <h2>Projects</h2>
-    </div>
-    <div class="achievements-box">
-        <div class="achievement-item"><a>
-            <h3>A simple calculator built using html,css and javascript</h3>
-        </a>
-    </div>
-</div>
-</section>
-<!-- Contact Section -->
-<section id="contact" class="contact-section">
-    <div class="section-header">
-        <h2>Contact</h2>
-    </div>
-    <div class="contact-box">
-        <form>
-            <label for="name">Name</label><br>
-            <input type="text" id="name" name="name" required><br>
-
-            <label for="phone">Phone Number</label><br>
-            <input type="tel" id="phone" name="phone" required><br>
-
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" required><br>
-
-            <label for="message">Message</label><br>
-            <textarea id="message" name="message" required></textarea><br>
-
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
-</section>
-<br><br><br><br>
-<!-- Footer -->
+  </section>
+  <section id="contact" aria-labelledby="contact-heading" tabindex="-1" role="region">
+    <h2 id="contact-heading">Contact Info</h2>
+    <form id="contact-form" aria-label="Contact form">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Kosuri Sunitha Sindhuja" required aria-required="true" autocomplete="name" />
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="+91 0000000000" pattern="\\+?\\d{10,15}" required aria-required="true" autocomplete="tel" />
+      <label for="email">Gmail</label>
+      <input type="email" id="email" name="email" placeholder="example@gmail.com" required aria-required="true" autocomplete="email" />
+      <button type="submit" aria-label="Send Message">Contact</button>
+    </form>
+  </section>
+</main>
 <footer>
-    <p>&copy; 2025 Kosuri Sunitha Sindhuja. All rights reserved.</p>
+  &copy; 2025 Kosuri Sunitha Sindhuja | All Rights Reserved.
 </footer>
-
-<script >
-    document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute('href'));
-        window.scrollTo({
-            top: target.offsetTop - 60,
-            behavior: 'smooth'
+<script>
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section');
+  function activateLink() {
+    let scrollPosition = window.scrollY + 130;
+    sections.forEach(section => {
+      if (
+        scrollPosition >= section.offsetTop &&
+        scrollPosition < section.offsetTop + section.offsetHeight
+      ) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.dataset.target === section.id) {
+            link.classList.add('active');
+          }
         });
+        section.classList.add('visible');
+      }
     });
-});
-
+  }
+  window.addEventListener('scroll', activateLink);
+  window.addEventListener('load', () => {
+    activateLink();
+    animateSkills();
+  });
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById(link.dataset.target).scrollIntoView({ behavior: 'smooth' });
+    });
+    link.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        document.getElementById(link.dataset.target).scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+  const skillsSection = document.getElementById('skills');
+  let skillsAnimated = false;
+  function animateSkills() {
+    const triggerPoint = window.innerHeight + window.scrollY > skillsSection.offsetTop + 100;
+    if (!skillsAnimated && triggerPoint) {
+      skillsAnimated = true;
+      const skillBars = skillsSection.querySelectorAll('.progress-bar span');
+      skillBars.forEach(bar => {
+        const targetWidth = bar.parentElement.getAttribute('aria-valuenow');
+        bar.style.width = `${targetWidth}%`;
+        setTimeout(() => bar.textContent = `${targetWidth}%`, 1800);
+      });
+    }
+  }
+  window.addEventListener('scroll', animateSkills);
+  document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Thank you for reaching out! I will get back to you soon.');
+    e.target.reset();
+  });
 </script>
 </body>
 </html>
